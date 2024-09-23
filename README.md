@@ -1,0 +1,1 @@
+# plugins-simple-membership-wp-user-import
