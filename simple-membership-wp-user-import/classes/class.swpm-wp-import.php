@@ -26,6 +26,10 @@ class SwpmWpImport {
     private function add(){
         $action = filter_input(INPUT_POST, 'add_all');
         if (!empty($action)){
+			if (!check_admin_referer('swpm-wp-import-all-users')){
+				wp_die(__("Nonce verification failed.", 'simple-membership'));
+			}
+
             $this->add_all();
         }
         $action = filter_input(INPUT_POST, 'action');

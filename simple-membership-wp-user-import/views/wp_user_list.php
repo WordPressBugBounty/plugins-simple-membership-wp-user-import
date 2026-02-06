@@ -44,6 +44,7 @@
         </table>
         <p class="submit">
             <input name="add_all" type="submit" class="button" value="Import All Users" />
+            <?php wp_nonce_field('swpm-wp-import-all-users') ?>
         </p>
     </form>
     <hr>
