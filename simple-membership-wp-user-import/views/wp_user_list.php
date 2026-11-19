@@ -60,6 +60,7 @@
     </form>
     <?php $wp_user->prepare_items(); ?>
     <form method="post">
+        <?php wp_nonce_field('swpm-wp-import-selective-users', 'swpm_import_selective_nonce'); ?>
         <?php $wp_user->display(); ?>
     </form>
 

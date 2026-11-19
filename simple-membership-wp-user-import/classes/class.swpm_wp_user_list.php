@@ -74,10 +74,9 @@ class SwpmWpUserList extends WP_List_Table {
     function prepare_items() {
         global $wpdb;
         $query = "SELECT * FROM " . $wpdb->users ;
-        if (isset($_POST['s'])){
-            $query .= " WHERE  user_login LIKE '%" . sanitize_text_field($_POST['s']) . "%' "
-                    . " OR user_email LIKE '%" . sanitize_text_field($_POST['s']) . "%' "
-                    . " OR display_name LIKE '%" . sanitize_text_field($_POST['s']) . "%' ";
+        if (isset($_POST['s']) && $_POST['s'] !== ''){
+            $search = '%' . $wpdb->esc_like(sanitize_text_field(wp_unslash($_POST['s']))) . '%';
+            $query .= $wpdb->prepare(" WHERE user_login LIKE %s OR user_email LIKE %s OR display_name LIKE %s ", $search, $search, $search);
         }
         $orderby = !empty($_GET["orderby"]) ? sanitize_text_field($_GET["orderby"]) : '';
         $orderby = $this->sanitize_value_by_array($orderby, $this->get_sortable_columns());
